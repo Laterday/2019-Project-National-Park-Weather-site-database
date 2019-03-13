@@ -35,6 +35,7 @@ namespace Capstone.Web
             string connectionString = Configuration.GetConnectionString("Default");
 
             services.AddScoped<IParkSQLDAL, ParkSQLDAL>(c => new ParkSQLDAL(connectionString));
+            services.AddScoped<IWeatherSQLDAL, WeatherSQLDAL>(c => new WeatherSQLDAL(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -12,10 +12,12 @@ namespace Capstone.Web.Controllers
     public class HomeController : Controller
     {
         private IParkSQLDAL parkSQLDAL;
+        private IWeatherSQLDAL weatherSQLDAL;
 
-        public HomeController(IParkSQLDAL parkSQLDAL)
+        public HomeController(IParkSQLDAL parkSQLDAL, IWeatherSQLDAL weatherSQLDAL)
         {
             this.parkSQLDAL = parkSQLDAL;
+            this.weatherSQLDAL = weatherSQLDAL;
         }
 
         [HttpGet]
@@ -29,9 +31,11 @@ namespace Capstone.Web.Controllers
         public IActionResult Detail(string parkCode)
         {
             Park park = parkSQLDAL.GetParkDetails(parkCode);
+            List<Weather> weatherList = weatherSQLDAL.GetForecast(parkCode);
             ParkWeather parkWeather = new ParkWeather
             {
-                Park = park
+                Park = park,
+                WeatherList = weatherList
             };
 
             return View(parkWeather);
