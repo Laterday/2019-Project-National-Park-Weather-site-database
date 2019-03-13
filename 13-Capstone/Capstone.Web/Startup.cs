@@ -36,6 +36,7 @@ namespace Capstone.Web
 
             services.AddScoped<IParkSQLDAL, ParkSQLDAL>(c => new ParkSQLDAL(connectionString));
             services.AddScoped<IWeatherSQLDAL, WeatherSQLDAL>(c => new WeatherSQLDAL(connectionString));
+            services.AddScoped<ISurveySQLDAL, SurveySQLDAL>(c => new SurveySQLDAL(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
