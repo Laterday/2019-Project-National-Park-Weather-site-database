@@ -1,4 +1,38 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Capstone.Web.Models.Park>
+
+@{
+    ViewData["Title"] = "National Parks";
 }
 
+<h2>National Parks</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkDescription)
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="~/img/parks/@(item.ParkCode).jpg" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkDescription)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

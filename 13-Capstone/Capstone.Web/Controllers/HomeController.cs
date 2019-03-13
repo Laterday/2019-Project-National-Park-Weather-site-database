@@ -5,14 +5,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Capstone.Web.Models;
+using Capstone.Web.DAL.Interfaces;
 
 namespace Capstone.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IParkSQLDAL parkSQLDAL;
+
+        public HomeController(IParkSQLDAL parkSQLDAL)
+        {
+            this.parkSQLDAL = parkSQLDAL;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            List<Park> parks = parkSQLDAL.GetParks();
+            return View(parks);
         }
 
       
