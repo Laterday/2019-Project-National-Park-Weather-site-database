@@ -18,13 +18,24 @@ namespace Capstone.Web.Controllers
             this.parkSQLDAL = parkSQLDAL;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             List<Park> parks = parkSQLDAL.GetParks();
             return View(parks);
         }
 
-      
+        [HttpGet]
+        public IActionResult Detail(string parkCode)
+        {
+            Park park = parkSQLDAL.GetParkDetails(parkCode);
+            ParkWeather parkWeather = new ParkWeather
+            {
+                Park = park
+            };
+
+            return View(parkWeather);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
