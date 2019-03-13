@@ -15,28 +15,48 @@
     <div>
         <img src="~/img/parks/@(Model.Park.ParkCode).jpg" />
     </div>
+    <div>Name:</div>
     <div>@Model.Park.ParkName</div>
-    <div>@Model.Park.Acreage</div>
-    <div>@Model.Park.ElevationInFeet</div>
-    <div>@Model.Park.MilesOfTrail</div>
-    <div>@Model.Park.NumberOfCampsites</div>
+    <div>Acres:</div>
+    <div>@Model.Park.Acreage.ToString("#,###")</div>
+    <div>Elevation (in feet):</div>
+    <div>@Model.Park.ElevationInFeet.ToString("#,###")</div>
+    <div>Miles of trail:</div>
+    <div>@Model.Park.MilesOfTrail.ToString("#,###")</div>
+    <div>Number of Campsites:</div>
+    <div>@Model.Park.NumberOfCampsites.ToString("#,###")</div>
+    <div>Climate:</div>
     <div>@Model.Park.Climate</div>
+    <div>Year Founded: </div>
     <div>@Model.Park.YearFounded</div>
-    <div>@Model.Park.AnnualVisitorCount</div>
+    <div>Annual Visitor Count:</div>
+    <div>@Model.Park.AnnualVisitorCount.ToString("#,###")</div>
+    <div>Quote:</div>
     <div>@Model.Park.InspirationalQuote</div>
+    <div>Quote Source:</div>
     <div>@Model.Park.InspirationalQuoteSource</div>
+    <div>Description:</div>
     <div>@Model.Park.ParkDescription</div>
-    <div>@Model.Park.EntryFee</div>
-    <div>@Model.Park.NumberOfAnimalSpecies</div>
+    <div>Entry Fee</div>
+    <div>@Model.Park.EntryFee.ToString("C2")</div>
+    <div>Number of Different Animal Species:</div>
+    <div>@Model.Park.NumberOfAnimalSpecies.ToString("#,###")</div>
 </div>
+
+
+
+<div>Weather</div>
 @foreach (Weather forecast in Model.WeatherList)
 {
     <div>
-        <div>Weather</div>
-        <div>Day</div>
-        <div>Picture</div>
-        <div>High</div>
-        <div>Low</div>
-        <div>Recommendation</div>
+        <div>Day @forecast.FiveDayForecastValue</div>
+        <div>
+            <img src="~/img/weather/@(forecast.PictureName).png" />
+        </div>
+        <div>High:</div>
+        <div>@forecast.High degrees F</div>
+        <div>Low:</div>
+        <div>@forecast.Low degrees F</div>
+        <div>@forecast.Recommendation</div>
     </div>
 }
