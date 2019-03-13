@@ -9,8 +9,7 @@
 <div>
     <h4>@Model.Park.ParkName</h4>
     <hr />
-    <dl class="dl-horizontal">
-    </dl>
+    <dl class="dl-horizontal"></dl>
 </div>
 <div>
     <div>
@@ -30,11 +29,14 @@
     <div>@Model.Park.EntryFee</div>
     <div>@Model.Park.NumberOfAnimalSpecies</div>
 </div>
-<div>
-    <div>Weather</div>
-    <div>Day</div>
-    <div>Picture</div>
-    <div>High</div>
-    <div>Low</div>
-    <div>Recommendation</div>
-</div>
+@foreach (Weather forecast in Model.WeatherList)
+{
+    <div>
+        <div>Weather</div>
+        <div>Day</div>
+        <div>Picture</div>
+        <div>High</div>
+        <div>Low</div>
+        <div>Recommendation</div>
+    </div>
+}
