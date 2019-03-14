@@ -8,10 +8,17 @@
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
+
     <title>National Park Weather Service</title>
     <style>
+
+        #test1 {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
         .img-item > img {
             height: 600px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
         .overlay-discription {
@@ -23,12 +30,30 @@
 
         .img-item-overlay {
             background-color: rgba(0,0,0,0.5);
+            box-shadow: 5px 10px;
+        }
+
+        .img-item {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 0.5%;
         }
     </style>
 </head>
 <body>
 
-   <img src="~/img/landscapes-mountains-water-nature-wallpapers-hd-live.jpg" />
+    <img src="~/img/landscapes-mountains-water-nature-wallpapers-hd-live.jpg" />
+
+    <form action="/Home/Detail" method="get">
+        <button name="parkCode" type="submit" value="@Model[1].ParkCode">Save and exit</button>
+    </form>
+
+    <form action="/action_page.php" method="get">
+        Choose your favorite subject:
+        <button name="subject" type="submit" value="fav_HTML">HTML</button>
+        <button name="subject" type="submit" value="fav_CSS">CSS</button>
+    </form>
+
+    <input type="button" value="Detail" onclick="location.href='@Url.Action("Detail", "Home")?id=' + document.getElementById('@Model[1].ParkCode').value" />
 
     <section class="gallery">
         <div class="container">
@@ -43,9 +68,13 @@
                                 <div class="img-item">
                                     <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
                                     <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-id="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
                                         <p class="overlay-discription">@Model[i].ParkDescription</p>
-                                        <button class="btn welcome-btn gallery-btn">view details</button>
+                                        <form asp-action="Detail" asp-controller="Home" method="get" asp-route-parkCode="@Model[i].ParkCode">
+                                            <button class="btn welcome-btn gallery-btn">view details</button>
+                                            <input type="submit" value="Create" class="btn btn-default" />
+                                        </form>
+
                                     </div>
                                 </div>
                             }
@@ -61,7 +90,7 @@
                                 <div class="img-item">
                                     <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
                                     <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-id="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
                                         <p class="overlay-discription">@Model[i].ParkDescription</p>
                                         <button class="btn welcome-btn gallery-btn">view details</button>
                                     </div>

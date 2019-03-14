@@ -89,7 +89,7 @@ html,body{height: 100%;}
     #mainNav.navbar-shrink {
         padding-top: 0;
         padding-bottom: 0;
-        background-color: #fff;
+        background-color: rgb(225, 227, 232);
         box-shadow: 0 0 20px rgba(0,0,0,.2);
     }
 
