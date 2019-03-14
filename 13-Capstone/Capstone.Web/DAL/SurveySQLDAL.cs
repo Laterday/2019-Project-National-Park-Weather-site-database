@@ -13,8 +13,7 @@ namespace Capstone.Web.DAL
         private string connectionString;
 
         private const string SQL_GetSurveyCount = "SELECT COUNT(parkCode) surveyCount, parkCode FROM survey_result GROUP BY parkCode";
-        private const string SQL_AddSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel)" +
-            " VALUES (@parkCode, @emailAddress, @state, @activityLevel)";
+        private const string SQL_AddSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel) VALUES (@parkCode, @emailAddress, @state, @activityLevel);";
 
         public SurveySQLDAL(string connectionString)
         {
