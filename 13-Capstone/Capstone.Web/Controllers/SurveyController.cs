@@ -11,15 +11,18 @@ namespace Capstone.Web.Controllers
     public class SurveyController : Controller
     {
         private ISurveySQLDAL surveySQLDAL;
+        private IParkSQLDAL parkSQLDAL;
 
-        public SurveyController(ISurveySQLDAL surveySQLDAL)
+        public SurveyController(ISurveySQLDAL surveySQLDAL, IParkSQLDAL parkSQLDAL)
         {
             this.surveySQLDAL = surveySQLDAL;
+            this.parkSQLDAL = parkSQLDAL;
         }
 
         [HttpGet]
         public IActionResult Submit()
         {
+            ViewBag.ParkSelectList = parkSQLDAL.GetUniqueParkNames();
             return View();
         }
 

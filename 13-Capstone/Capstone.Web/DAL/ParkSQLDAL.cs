@@ -1,5 +1,6 @@
 ﻿using Capstone.Web.DAL.Interfaces;
 using Capstone.Web.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -13,6 +14,7 @@ namespace Capstone.Web.DAL
         private string connectionString;
 
         private const string SQL_GetParks = "SELECT * FROM park;";
+        private const string SQL_GetUniqueParkNames = "SELECT DISTINCT parkCode, parkName FROM park ORDER BY parkName;";
         private const string SQL_GetParkDetails = "SELECT * FROM park WHERE parkCode = @parkCode;";
 
         public ParkSQLDAL(string connectionString)
@@ -60,6 +62,38 @@ namespace Capstone.Web.DAL
             catch (Exception)
             {
                 parks = new List<Park>();
+            }
+
+            return parks;
+        }
+
+        public List<SelectListItem> GetUniqueParkNames()
+        {
+            List<SelectListItem> parks = new List<SelectListItem>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand(SQL_GetUniqueParkNames, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        SelectListItem item = new SelectListItem();
+
+                        item.Value = Convert.ToString(reader["parkCode"]);
+                        item.Text = Convert.ToString(reader["parkName"]);
+
+                        parks.Add(item);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                parks = new List<SelectListItem>();
             }
 
             return parks;

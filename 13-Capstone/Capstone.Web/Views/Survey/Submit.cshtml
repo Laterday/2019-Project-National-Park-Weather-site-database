@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Submit Survey";
+    List<SelectListItem> parkNames = ViewBag.ParkSelectList as List<SelectListItem>;
 }
 
 <h2>Survey</h2>
@@ -14,7 +15,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ParkCode" class="control-label"></label>
-                <input asp-for="ParkCode" class="form-control" />
+                <select asp-for="ParkCode" asp-items="@parkNames" class="form-control"></select>
                 <span asp-validation-for="ParkCode" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -24,16 +25,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
+                <select asp-for="State" asp-items="Survey.states" class="form-control"></select>
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ActivityLevel" class="control-label"></label>
-                <input asp-for="ActivityLevel" class="form-control" />
+                <select asp-for="ActivityLevel" asp-items="Survey.activity" class="form-control"></select>
                 <span asp-validation-for="ActivityLevel" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Submit" class="btn btn-default" />
             </div>
         </form>
     </div>
