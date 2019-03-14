@@ -1,38 +1,102 @@
-﻿@model IEnumerable<Capstone.Web.Models.Park>
+﻿@model List<Park>
 
 @{
-    ViewData["Title"] = "National Parks";
+    ViewData["Title"] = "Index";
+    Random rnd = new Random();
+
+    string HeightRandom()
+    {
+        int random = rnd.Next(1, 5);
+        string height = "300";
+
+        switch (random)
+        {
+            case 1:
+                height = "225px";
+                break;
+
+            case 2:
+                height = "500px";
+                break;
+
+            case 3:
+                height = "350px";
+                break;
+
+            case 4:
+                height = "250px";
+                break;
+
+            case 5:
+                height = "300px";
+                break;
+
+            default:
+                height = "300px";
+                break;
+        }
+
+        return height;
+    }
+
 }
 
-<h2>National Parks</h2>
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <title>National Park Weather Service</title>
+    <style>
+        .img-item > img {
+            height: 600px;
+        
+        }
+    </style>
+</head>
+<body>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkDescription)
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <img src="~/img/parks/@(item.ParkCode).jpg" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParkName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParkDescription)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <section class="gallery">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="single-gallery-box">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <div class="img-item">
+                                    <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
+                                    <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-id="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                        <p>@Model[i].ParkDescription</p>
+                                        <button class="btn welcome-btn gallery-btn">view details</button>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="single-gallery-box">
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            if (i % 2 != 0)
+                            {
+                                <div class="img-item">
+                                    <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
+                                    <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-id="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                        <p>@Model[i].ParkDescription</p>
+                                        <button class="btn welcome-btn gallery-btn">view details</button>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+
+
