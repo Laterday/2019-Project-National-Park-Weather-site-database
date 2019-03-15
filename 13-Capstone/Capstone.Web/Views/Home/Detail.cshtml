@@ -9,15 +9,38 @@
 <head>
     <style>
         .test > img {
-            width: 60%;
-            height: 60%;
+            width: 80%;
+            height: 80%;
         }
 
         .container > a {
             display: none;
         }
 
-        h1 {
+        .about-overlay > img {
+            margin-top: 100px;
+        }
+
+        .ul-1 > li {
+            color: white;
+        }
+
+        .img-detail {
+            position: relative;
+            right: 60px;
+            top: 50px;
+            width: 120%;
+        }
+
+        #car1 {
+            text-align:center;
+        }
+        #quote {
+            margin: 0;
+            text-indent: 20em
+        }
+
+        /*h1 {
             width: 100%;
             font-size: 64px;
             text-align: center;
@@ -38,7 +61,8 @@
             top: 0;
             background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 46%,rgba(255,255,255,1) 100%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-        }
+        }*/
+
     </style>
 </head>
 <body>
@@ -52,16 +76,16 @@
                             <span>@Model.Park.ParkDescription.Substring(0, 1)</span>@Model.Park.ParkDescription.Substring(1)
                         </p>
                         <p>
-                            @Model.Park.InspirationalQuote
-
-                            -@Model.Park.InspirationalQuoteSource
+                            @Model.Park.InspirationalQuote  
                         </p>
+
+                        <p id="quote">- @Model.Park.InspirationalQuoteSource</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="about-overlay">
-            <img src="~/img/parks/@(Model.Park.ParkCode).jpg">
+            <img class="img-detail" src="~/img/parks/@(Model.Park.ParkCode).jpg">
         </div>
     </section>
 
@@ -70,81 +94,177 @@
             <div class="row">
                 <div class="col-lg-7">
                     <div class="single-about-txt-2">
-                        <h4>Other Facts</h4>
-                        <p>
-                            @Model.Park.Acreage.ToString("#,###")
+                        <h4>Other Details</h4>
 
-                            @Model.Park.ElevationInFeet.ToString("#,###")
+                        <ul class="ul-1">
+                            <li>@Model.Park.Climate</li>
+                            <li>@Model.Park.MilesOfTrail.ToString("#,###")</li>
+                            <li>@Model.Park.NumberOfCampsites.ToString("#,###")</li>
+                            <li>@Model.Park.EntryFee.ToString("C2")</li>
+                        </ul>
 
-                            @Model.Park.MilesOfTrail.ToString("#,###")
-
-                            @Model.Park.NumberOfCampsites.ToString("#,###")    @*MAKE LIST*@
-
-
-                        </p>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="single-about-txt">
-                        <h2>More Facts</h2>   @*Change title*@
-                        <p>
-                            <span></span> @Model.Park.Climate
+                        <h2>Interesting Facts</h2>   @*Change title*@
+                        <ul class="ul-2">
+                            <li>@Model.Park.YearFounded</li>
+                            <li>@Model.Park.AnnualVisitorCount.ToString("#,###")</li>
+                            <li>@Model.Park.NumberOfAnimalSpecies.ToString("#,###")</li>
+                            <li>@Model.Park.Acreage.ToString("#,###")</li>
+                            <li>@Model.Park.ElevationInFeet.ToString("#,###")</li>
+                        </ul>
 
-                            @Model.Park.YearFounded
-
-                            @Model.Park.AnnualVisitorCount.ToString("#,###")
-
-                            @Model.Park.EntryFee.ToString("C2")
-
-                            @Model.Park.NumberOfAnimalSpecies.ToString("#,###")
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="about-overlay-2"></div>
     </section>
+
+
+
 </body>
 </html>
 
-<div>Weather</div>
 <a asp-controller="Home" asp-action="ConvertTemperature" asp-route-parkCode="@Model.ParkCode">Convert Temperature</a>
-@foreach (Weather forecast in Model.WeatherList)
-{ 
-    <div>
-        <div>Day @forecast.FiveDayForecastValue</div>
-
-        <div>
-            <div>
-                <img src="~/img/weather/@(forecast.PictureName).png" />
-            </div>
-        </div>
-
-        
-    </div>
-    <div>High:</div>
-
-        if (ViewBag.TempUnit == "Celsius")
-        {
-            <div>@Weather.FarenheitToCelsius(forecast.High) degrees C</div>
-        }
-        else
-        {
-            <div>@forecast.High degrees F</div>
-        }
-
-    <div>Low:</div>
- 
-        if (ViewBag.TempUnit == "Celsius")
-        {
-            <div>@Weather.FarenheitToCelsius(forecast.Low) degrees C</div>
-        }
-        else
-        {
-            <div>@forecast.Low degrees F</div>
-        }
-
-    <div>@forecast.Recommendation</div>
 
 }
 
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active" id="car1">
+
+                <div class="featured-txt">
+                    <div class="row" id="car1">
+                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
+                            <div class="single-featured-box" id="car1">
+                                <img src="~/img/weather/@(Model.WeatherList[0].PictureName).png" alt="featured-images">
+                                <div class="single-featured-box-overlay">
+                                    <ul>
+                                        @if (ViewBag.TempUnit == "Celsius")
+                                        {
+                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[0].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[0].High) C</li>
+
+                                        }
+                                        else
+                                        {
+                                            <li>Low @Model.WeatherList[0].Low f - High @Model.WeatherList[0].High f</li>
+
+                                        }
+                                        <li>@Model.WeatherList[0].Recommendation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
+                            <div class="single-featured-box" id="car1">
+                                <img src="~/img/weather/@(Model.WeatherList[1].PictureName).png" alt="featured-images">
+                                <div class="single-featured-box-overlay">
+                                    <ul>
+                                        @if (ViewBag.TempUnit == "Celsius")
+                                        {
+                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[1].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[1].High) C</li>
+
+                                        }
+                                        else
+                                        {
+                                            <li>Low @Model.WeatherList[1].Low f - High @Model.WeatherList[1].High f</li>
+
+                                        }
+                                        <li>@Model.WeatherList[1].Recommendation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
+                            <div class="single-featured-box" id="car1">
+                                <img src="~/img/weather/@(Model.WeatherList[2].PictureName).png" alt="featured-images">
+                                <div class="single-featured-box-overlay">
+                                    <ul>
+                                        @if (ViewBag.TempUnit == "Celsius")
+                                        {
+                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[2].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[2].High) C</li>
+
+                                        }
+                                        else
+                                        {
+                                            <li>Low @Model.WeatherList[2].Low f - High @Model.WeatherList[2].High f</li>
+
+                                        }
+                                        <li>@Model.WeatherList[2].Recommendation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="car1">
+                <div class="featured-txt">
+                    <div class="row" id="car1">
+                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
+                            <div class="single-featured-box" id="car1">
+                                <img src="~/img/weather/@(Model.WeatherList[3].PictureName).png" alt="featured-images">
+                                <div class="single-featured-box-overlay">
+                                    <ul>
+                                        @if (ViewBag.TempUnit == "Celsius")
+                                        {
+                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[3].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[3].High) C</li>
+
+                                        }
+                                        else
+                                        {
+                                            <li>Low @Model.WeatherList[3].Low f - High @Model.WeatherList[3].High f</li>
+
+                                        }
+                                        <li>@Model.WeatherList[3].Recommendation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
+                            <div class="single-featured-box" id="car1">
+                                <img src="~/img/weather/@(Model.WeatherList[4].PictureName).png" alt="featured-images">
+                                <div class="single-featured-box-overlay">
+                                    <ul>
+                                        @if (ViewBag.TempUnit == "Celsius")
+                                        {
+                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[4].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[4].High) C</li>
+
+                                        }
+                                        else
+                                        {
+                                            <li>Low @Model.WeatherList[4].Low f - High @Model.WeatherList[4].High f</li>
+
+                                        }
+                                        <li>@Model.WeatherList[4].Recommendation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>

@@ -54,7 +54,7 @@ ul {
 
     ul li {
         list-style: none;
-        display: inline-block;
+       
     }
 
 select, input, textarea, button, .form-control {
@@ -104,6 +104,10 @@ html, body {
 --------------------------------------*/
 .navbar {
     padding: 34px 0;
+}
+
+.nav-item{
+    padding-right: 15px;
 }
 
 @media (min-width:992px) {
