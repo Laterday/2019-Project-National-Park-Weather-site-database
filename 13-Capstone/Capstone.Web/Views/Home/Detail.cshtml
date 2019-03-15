@@ -4,59 +4,123 @@
     ViewData["Title"] = Model.Park.ParkName;
 }
 
-<h2>@Model.Park.ParkName</h2>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        .test > img {
+            width: 60%;
+            height: 60%;
+        }
 
-<div>
-    <h4>@Model.Park.ParkName</h4>
-    <hr />
-    <dl class="dl-horizontal"></dl>
-</div>
-<div>
-    <div>
-        <img src="~/img/parks/@(Model.Park.ParkCode).jpg" />
-    </div>
-    <div>Name:</div>
-    <div>@Model.Park.ParkName</div>
-    <div>Acres:</div>
-    <div>@Model.Park.Acreage.ToString("#,###")</div>
-    <div>Elevation (in feet):</div>
-    <div>@Model.Park.ElevationInFeet.ToString("#,###")</div>
-    <div>Miles of trail:</div>
-    <div>@Model.Park.MilesOfTrail.ToString("#,###")</div>
-    <div>Number of Campsites:</div>
-    <div>@Model.Park.NumberOfCampsites.ToString("#,###")</div>
-    <div>Climate:</div>
-    <div>@Model.Park.Climate</div>
-    <div>Year Founded: </div>
-    <div>@Model.Park.YearFounded</div>
-    <div>Annual Visitor Count:</div>
-    <div>@Model.Park.AnnualVisitorCount.ToString("#,###")</div>
-    <div>Quote:</div>
-    <div>@Model.Park.InspirationalQuote</div>
-    <div>Quote Source:</div>
-    <div>@Model.Park.InspirationalQuoteSource</div>
-    <div>Description:</div>
-    <div>@Model.Park.ParkDescription</div>
-    <div>Entry Fee</div>
-    <div>@Model.Park.EntryFee.ToString("C2")</div>
-    <div>Number of Different Animal Species:</div>
-    <div>@Model.Park.NumberOfAnimalSpecies.ToString("#,###")</div>
-</div>
+        /*.container > a {
+            display: none;
+        }
 
+        h1 {
+            width: 100%;
+            font-size: 64px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            opacity: 1;
+        }
 
+        .fontLayer {
+            z-index: 1;
+        }
 
-<div>Weather</div>
-@foreach (Weather forecast in Model.WeatherList)
-{
-    <div>
-        <div>Day @forecast.FiveDayForecastValue</div>
-        <div>
-            <img src="~/img/weather/@(forecast.PictureName).png" />
+        .fadeTop {
+            width: 100%;
+            height: 2000px;
+            z-index: 5;
+            position: absolute;
+            top: 0;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 46%,rgba(255,255,255,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+        }*/
+    </style>
+</head>
+<body>
+    <!--about start -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-12">
+                    <div class="single-about-txt">
+                        <h2>@Model.Park.ParkName</h2>
+                        <p>
+                            <span>l</span>@Model.Park.ParkDescription @*do substring here to get first letter*@
+                        </p>
+                        <p>
+                            @Model.Park.InspirationalQuote
+
+                            -@Model.Park.InspirationalQuoteSource
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>High:</div>
-        <div>@forecast.High degrees F</div>
-        <div>Low:</div>
-        <div>@forecast.Low degrees F</div>
-        <div>@forecast.Recommendation</div>
-    </div>
-}
+        <div class="about-overlay">
+            <img src="~/img/parks/@(Model.Park.ParkCode).jpg">
+        </div>
+    </section>
+
+    <section id="about-2" class="about-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="single-about-txt-2">
+                        <h4>Other Facts</h4>
+                        <p>
+                            @Model.Park.Acreage.ToString("#,###")
+
+                            @Model.Park.ElevationInFeet.ToString("#,###")
+
+                            @Model.Park.MilesOfTrail.ToString("#,###")
+
+                            @Model.Park.NumberOfCampsites.ToString("#,###")    @*MAKE LIST*@
+
+                           
+                        </p>            
+                    </div><!--/.single-about-txt-->
+                </div><!--/.col-->
+                <div class="col-lg-5">
+                    <div class="single-about-txt">
+                        <h2>More Facts</h2>   @*Change title*@ 
+                        <p>
+                            <span></span> @Model.Park.Climate
+
+                            @Model.Park.YearFounded
+
+                            @Model.Park.AnnualVisitorCount.ToString("#,###")
+
+                            @Model.Park.EntryFee.ToString("C2")
+
+                            @Model.Park.NumberOfAnimalSpecies.ToString("#,###")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-overlay-2"></div>
+    </section>  
+
+    <div>Weather</div>
+    @foreach (Weather forecast in Model.WeatherList)
+    {
+        <div>
+            <div>Day @forecast.FiveDayForecastValue</div>
+            <div>
+                <img src="~/img/weather/@(forecast.PictureName).png" />
+            </div>
+            <div>High:</div>
+            <div>@forecast.High degrees F</div>
+            <div>Low:</div>
+            <div>@forecast.Low degrees F</div>
+            <div>@forecast.Recommendation</div>
+        </div>
+    }
+
+</body>
+</html>
+

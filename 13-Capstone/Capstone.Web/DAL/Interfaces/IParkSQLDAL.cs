@@ -1,4 +1,5 @@
 ﻿using Capstone.Web.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Capstone.Web.DAL.Interfaces
     {
         List<Park> GetParks();
         Park GetParkDetails(string parkCode);
+        List<SelectListItem> GetUniqueParkNames();
     }
 }

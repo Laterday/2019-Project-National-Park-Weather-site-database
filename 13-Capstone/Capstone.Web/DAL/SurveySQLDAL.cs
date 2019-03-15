@@ -12,7 +12,7 @@ namespace Capstone.Web.DAL
     {
         private string connectionString;
 
-        private const string SQL_GetSurveyCount = "SELECT COUNT(parkCode) surveyCount, parkCode FROM survey_result GROUP BY parkCode";
+        private const string SQL_GetSurveyCount = "SELECT COUNT(survey_result.parkCode) AS surveyCount, survey_result.parkCode, park.parkName FROM survey_result JOIN park ON survey_result.parkCode = park.parkCode GROUP BY survey_result.parkCode, park.parkName ORDER BY surveyCount DESC";
         private const string SQL_AddSurvey = "INSERT INTO survey_result (parkCode, emailAddress, state, activityLevel) VALUES (@parkCode, @emailAddress, @state, @activityLevel);";
 
         public SurveySQLDAL(string connectionString)
@@ -23,7 +23,6 @@ namespace Capstone.Web.DAL
         public List<SurveyResult> GetSurveyCount()
         {
             List<SurveyResult> surveyResultList = new List<SurveyResult>();
-            SurveyResult surveyResult = new SurveyResult();
 
             try
             {
@@ -31,13 +30,16 @@ namespace Capstone.Web.DAL
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL_GetSurveyCount, conn);              
+                    SqlCommand cmd = new SqlCommand(SQL_GetSurveyCount, conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
+                        SurveyResult surveyResult = new SurveyResult();
+
                         surveyResult.SurveyCount = Convert.ToInt32(reader["surveyCount"]);
                         surveyResult.ParkCode = Convert.ToString(reader["parkCode"]);
+                        surveyResult.ParkName = Convert.ToString(reader["parkName"]);
 
                         surveyResultList.Add(surveyResult);
                     }
