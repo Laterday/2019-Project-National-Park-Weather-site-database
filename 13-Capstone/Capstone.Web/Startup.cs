@@ -32,6 +32,14 @@ namespace Capstone.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                // Sets session expiration to 20 minutes
+                options.IdleTimeout = TimeSpan.FromMinutes(2000);
+                options.Cookie.HttpOnly = true;
+            });
+
             string connectionString = Configuration.GetConnectionString("Default");
 
             services.AddScoped<IParkSQLDAL, ParkSQLDAL>(c => new ParkSQLDAL(connectionString));

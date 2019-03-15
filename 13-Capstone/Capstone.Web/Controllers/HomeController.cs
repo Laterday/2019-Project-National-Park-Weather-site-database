@@ -23,6 +23,11 @@ namespace Capstone.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            //if (ViewBag.TempUnit == null)
+            //{
+            //    ViewBag.TempUnit = "";
+            //}
+
             List<Park> parks = parkSQLDAL.GetParks();
             return View(parks);
         }
@@ -38,7 +43,38 @@ namespace Capstone.Web.Controllers
                 WeatherList = weatherList
             };
 
+            if (TempData["TempUnit"] == null)
+            {
+                TempData["TempUnit"] = "";
+            }
+
+            ViewBag.TempUnit = TempData["TempUnit"].ToString();
+
             return View(parkWeather);
+        }
+
+        [HttpGet]
+        public IActionResult ConvertTemperature(string parkCode)
+        {
+            if (ViewBag.TempUnit == "Celsius")
+            {
+                TempData["TempUnit"] = "";
+            }
+            else
+            {
+                TempData["TempUnit"] = "Celsius";
+            }
+
+            Park park = parkSQLDAL.GetParkDetails(parkCode);
+            List<Weather> weatherList = weatherSQLDAL.GetForecast(parkCode);
+            ParkWeather parkWeather = new ParkWeather
+            {
+                Park = park,
+                WeatherList = weatherList,
+                ParkCode = parkCode
+            };
+
+            return RedirectToAction("Detail", "Home", parkCode as object);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

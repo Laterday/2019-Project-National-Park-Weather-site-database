@@ -46,6 +46,7 @@
 
 
 <div>Weather</div>
+<a asp-controller="Home" asp-action="ConvertTemperature" asp-route-parkCode="@Model.Park.ParkCode">Convert Temperature</a>
 @foreach (Weather forecast in Model.WeatherList)
 {
     <div>
@@ -54,9 +55,27 @@
             <img src="~/img/weather/@(forecast.PictureName).png" />
         </div>
         <div>High:</div>
-        <div>@forecast.High degrees F</div>
+        @{
+            if (ViewBag.TempUnit == "Celsius")
+            {
+                <div>@Weather.FarenheitToCelsius(forecast.High) degrees C</div>
+            }
+            else
+            {
+                <div>@forecast.High degrees F</div>
+            }
+        }
         <div>Low:</div>
-        <div>@forecast.Low degrees F</div>
+        @{
+            if (ViewBag.TempUnit == "Celsius")
+            {
+                <div>@Weather.FarenheitToCelsius(forecast.Low) degrees C</div>
+            }
+            else
+            {
+                <div>@forecast.Low degrees F</div>
+            }
+        }
         <div>@forecast.Recommendation</div>
     </div>
 }

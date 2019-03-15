@@ -10,5 +10,6 @@ namespace Capstone.Web.Models
         public Park Park { get; set; }
         public List<Weather> WeatherList { get; set; }
         public string ParkName { get; set; }
+        public string ParkCode { get; set; }
     }
 }
