@@ -116,8 +116,7 @@ html, body {
     }
 
         #mainNav .navbar-brand {
-            font-size: 1.75em;
-            -webkit-transition: all .3s;
+            font-size: 1.75em;   
             transition: all .3s
         }
 
@@ -653,10 +652,6 @@ html, body {
     background: #620095;
     border: 1px solid #620095;
     border-radius: 50%;
-    -webkit-transition: .5s;
-    -moz-transition: .5s;
-    -ms-transition: .5s;
-    -o-transition: .5s;
     transition: .5s;
     z-index: 2;
 }
@@ -689,4 +684,3 @@ html, body {
         bottom: 7px;
     }
 }
-
