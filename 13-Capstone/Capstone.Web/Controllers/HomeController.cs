@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Capstone.Web.Models;
 using Capstone.Web.DAL.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace Capstone.Web.Controllers
 {
@@ -18,15 +19,16 @@ namespace Capstone.Web.Controllers
         {
             this.parkSQLDAL = parkSQLDAL;
             this.weatherSQLDAL = weatherSQLDAL;
+            
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            //if (ViewBag.TempUnit == null)
-            //{
-            //    ViewBag.TempUnit = "";
-            //}
+            if (HttpContext.Session.GetString("TempData") == null)
+            {
+                HttpContext.Session.SetString("TempData", "");
+            }
 
             List<Park> parks = parkSQLDAL.GetParks();
             return View(parks);
@@ -40,15 +42,11 @@ namespace Capstone.Web.Controllers
             ParkWeather parkWeather = new ParkWeather
             {
                 Park = park,
-                WeatherList = weatherList
+                WeatherList = weatherList,
+                ParkCode = parkCode
             };
 
-            if (TempData["TempUnit"] == null)
-            {
-                TempData["TempUnit"] = "";
-            }
-
-            ViewBag.TempUnit = TempData["TempUnit"].ToString();
+            ViewBag.TempUnit = HttpContext.Session.GetString("TempData");
 
             return View(parkWeather);
         }
@@ -56,13 +54,13 @@ namespace Capstone.Web.Controllers
         [HttpGet]
         public IActionResult ConvertTemperature(string parkCode)
         {
-            if (ViewBag.TempUnit == "Celsius")
+            if (HttpContext.Session.GetString("TempData") == "")
             {
-                TempData["TempUnit"] = "";
+                HttpContext.Session.SetString("TempData", "Celsius");
             }
             else
             {
-                TempData["TempUnit"] = "Celsius";
+                HttpContext.Session.SetString("TempData", "");
             }
 
             Park park = parkSQLDAL.GetParkDetails(parkCode);
@@ -74,7 +72,7 @@ namespace Capstone.Web.Controllers
                 ParkCode = parkCode
             };
 
-            return RedirectToAction("Detail", "Home", parkCode as object);
+            return RedirectToAction("Detail", "Home", new { parkCode = parkWeather.ParkCode });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

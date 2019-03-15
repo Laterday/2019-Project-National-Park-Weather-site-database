@@ -61,7 +61,7 @@
                                 <div class="img-item">
                                     <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
                                     <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-id="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
                                         <p class="overlay-discription">@Model[i].ParkDescription</p>
                                         <a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">view details</a>
                                     </div>

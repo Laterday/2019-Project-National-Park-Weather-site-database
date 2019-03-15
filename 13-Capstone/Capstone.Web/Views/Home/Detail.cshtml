@@ -46,7 +46,7 @@
 
 
 <div>Weather</div>
-<a asp-controller="Home" asp-action="ConvertTemperature" asp-route-parkCode="@Model.Park.ParkCode">Convert Temperature</a>
+<a asp-controller="Home" asp-action="ConvertTemperature" asp-route-parkCode="@Model.ParkCode">Convert Temperature</a>
 @foreach (Weather forecast in Model.WeatherList)
 {
     <div>

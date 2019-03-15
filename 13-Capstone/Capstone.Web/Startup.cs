@@ -6,6 +6,7 @@ using Capstone.Web.DAL;
 using Capstone.Web.DAL.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -38,6 +39,7 @@ namespace Capstone.Web
                 // Sets session expiration to 20 minutes
                 options.IdleTimeout = TimeSpan.FromMinutes(2000);
                 options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
 
             string connectionString = Configuration.GetConnectionString("Default");
@@ -46,7 +48,9 @@ namespace Capstone.Web
             services.AddScoped<IWeatherSQLDAL, WeatherSQLDAL>(c => new WeatherSQLDAL(connectionString));
             services.AddScoped<ISurveySQLDAL, SurveySQLDAL>(c => new SurveySQLDAL(connectionString));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddSessionStateTempDataProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,10 +63,13 @@ namespace Capstone.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
