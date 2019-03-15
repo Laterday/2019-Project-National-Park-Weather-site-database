@@ -49,7 +49,7 @@
                     <div class="single-about-txt">
                         <h2>@Model.Park.ParkName</h2>
                         <p>
-                            <span>l</span>@Model.Park.ParkDescription @*do substring here to get first letter*@
+                            <span>@Model.Park.ParkDescription.Substring(0, 1)</span>@Model.Park.ParkDescription.Substring(1)
                         </p>
                         <p>
                             @Model.Park.InspirationalQuote
@@ -115,18 +115,12 @@
         <div>Day @forecast.FiveDayForecastValue</div>
 
         <div>
-            <div>Day @forecast.FiveDayForecastValue</div>
             <div>
                 <img src="~/img/weather/@(forecast.PictureName).png" />
             </div>
-            <div>High:</div>
-            <div>@forecast.High degrees F</div>
-            <div>Low:</div>
-            <div>@forecast.Low degrees F</div>
-            <div>@forecast.Recommendation</div>
         </div>
 
-        }
+        
     </div>
     <div>High:</div>
 
