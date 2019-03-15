@@ -4,10 +4,6 @@
 }
 
 * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
-    -ms-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -78,10 +74,6 @@ html, body {
 }
 
 [placeholder]:focus::-webkit-input-placeholder {
-    -webkit-transition: opacity 0.3s 0.3s ease;
-    -moz-transition: opacity 0.3s 0.3s ease;
-    -ms-transition: opacity 0.3s 0.3s ease;
-    -o-transition: opacity 0.3s 0.3s ease;
     transition: opacity 0.3s 0.3s ease;
     opacity: 0;
 }
@@ -118,7 +110,6 @@ html, body {
     #mainNav {
         padding-top: 25px;
         padding-bottom: 25px;
-        -webkit-transition: padding-top .3s, padding-bottom .3s;
         transition: padding-top .3s, padding-bottom .3s;
         border: none;
         background-color: transparent

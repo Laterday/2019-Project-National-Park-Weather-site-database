@@ -4,6 +4,7 @@
     ViewData["Title"] = Model.Park.ParkName;
 }
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <style>
@@ -41,7 +42,6 @@
     </style>
 </head>
 <body>
-    <!--about start -->
     <section id="about" class="about">
         <div class="container">
             <div class="row">
@@ -80,13 +80,13 @@
 
                             @Model.Park.NumberOfCampsites.ToString("#,###")    @*MAKE LIST*@
 
-                           
-                        </p>            
-                    </div><!--/.single-about-txt-->
-                </div><!--/.col-->
+
+                        </p>
+                    </div>
+                </div>
                 <div class="col-lg-5">
                     <div class="single-about-txt">
-                        <h2>More Facts</h2>   @*Change title*@ 
+                        <h2>More Facts</h2>   @*Change title*@
                         <p>
                             <span></span> @Model.Park.Climate
 
@@ -103,11 +103,17 @@
             </div>
         </div>
         <div class="about-overlay-2"></div>
-    </section>  
+    </section>
+</body>
+</html>
 
-    <div>Weather</div>
-    @foreach (Weather forecast in Model.WeatherList)
-    {
+<div>Weather</div>
+<a asp-controller="Home" asp-action="ConvertTemperature" asp-route-parkCode="@Model.ParkCode">Convert Temperature</a>
+@foreach (Weather forecast in Model.WeatherList)
+{ 
+    <div>
+        <div>Day @forecast.FiveDayForecastValue</div>
+
         <div>
             <div>Day @forecast.FiveDayForecastValue</div>
             <div>
@@ -119,8 +125,32 @@
             <div>@forecast.Low degrees F</div>
             <div>@forecast.Recommendation</div>
         </div>
-    }
 
-</body>
-</html>
+        }
+    </div>
+    <div>High:</div>
+
+        if (ViewBag.TempUnit == "Celsius")
+        {
+            <div>@Weather.FarenheitToCelsius(forecast.High) degrees C</div>
+        }
+        else
+        {
+            <div>@forecast.High degrees F</div>
+        }
+
+    <div>Low:</div>
+ 
+        if (ViewBag.TempUnit == "Celsius")
+        {
+            <div>@Weather.FarenheitToCelsius(forecast.Low) degrees C</div>
+        }
+        else
+        {
+            <div>@forecast.Low degrees F</div>
+        }
+
+    <div>@forecast.Recommendation</div>
+
+}
 
