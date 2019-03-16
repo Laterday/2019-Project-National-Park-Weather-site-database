@@ -33,11 +33,62 @@
         }
 
         #car1 {
-            text-align:center;
+            text-align: center;
         }
+
         #quote {
             margin: 0;
             text-indent: 20em
+        }
+
+        .ul-1 > li {
+            padding-bottom: 8px;
+        }
+
+        .ul-2 > li {
+            padding-bottom: 8px;
+        }
+
+        .span-bold {
+            font-weight: bold;
+        }
+
+        .ul-2 {
+            padding-bottom: 8px;
+        }
+
+        .single-featured-box-overlay > ul > li{
+            font-size: 14px;
+        }
+
+
+
+        .single-featured-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .container-overlay {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, .8);
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            transition: .5s ease;
+        }
+
+        .single-featured-box:hover .container-overlay {
+            bottom: 90%;
+            height: 10%;
         }
 
         /*h1 {
@@ -76,7 +127,7 @@
                             <span>@Model.Park.ParkDescription.Substring(0, 1)</span>@Model.Park.ParkDescription.Substring(1)
                         </p>
                         <p>
-                            @Model.Park.InspirationalQuote  
+                            @Model.Park.InspirationalQuote
                         </p>
 
                         <p id="quote">- @Model.Park.InspirationalQuoteSource</p>
@@ -97,10 +148,25 @@
                         <h4>Other Details</h4>
 
                         <ul class="ul-1">
-                            <li>@Model.Park.Climate</li>
-                            <li>@Model.Park.MilesOfTrail.ToString("#,###")</li>
-                            <li>@Model.Park.NumberOfCampsites.ToString("#,###")</li>
-                            <li>@Model.Park.EntryFee.ToString("C2")</li>
+                            <li>@Model.Park.Climate Climate</li>
+
+                            <li>@Model.Park.ParkName has over @Model.Park.MilesOfTrail.ToString("#,###") miles of trails</li>
+
+                            @if (Model.Park.NumberOfCampsites > 0)
+                            {
+                                <li>There are @Model.Park.NumberOfCampsites.ToString("#,###") campsites</li>
+
+                            }
+                            @if (Model.Park.EntryFee == 0)
+                            {
+                                <li>There is no entry fee</li>
+                            }
+                            else
+                            {
+                                <li>The entry fee is @Model.Park.EntryFee.ToString("C2")</li>
+                            }
+
+
                         </ul>
 
                     </div>
@@ -109,28 +175,21 @@
                     <div class="single-about-txt">
                         <h2>Interesting Facts</h2>   @*Change title*@
                         <ul class="ul-2">
-                            <li>@Model.Park.YearFounded</li>
-                            <li>@Model.Park.AnnualVisitorCount.ToString("#,###")</li>
-                            <li>@Model.Park.NumberOfAnimalSpecies.ToString("#,###")</li>
-                            <li>@Model.Park.Acreage.ToString("#,###")</li>
-                            <li>@Model.Park.ElevationInFeet.ToString("#,###")</li>
+                            <li>Founded in <span class="span-bold">@Model.Park.YearFounded</span></li>
+                            <li>We host <span class="span-bold">@Model.Park.AnnualVisitorCount.ToString("#,###")</span> Annual visitors </li>
+                            <li><span class="span-bold">@Model.Park.NumberOfAnimalSpecies.ToString("#,###")</span> Unique animal species</li>
+                            <li><span class="span-bold">@Model.Park.Acreage.ToString("#,###")</span> Acres of wilderness</li>
+                            <li><span class="span-bold">@Model.Park.ElevationInFeet.ToString("#,###")</span> feet of elevation for you climbers out there</li>
                         </ul>
-
+                        <form asp-controller="Home" asp-action="ConvertTemperature" method="get">
+                            <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model.ParkCode">Temp Conversion</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="about-overlay-2"></div>
     </section>
-
-
-
-</body>
-</html>
-
-<a asp-controller="Home" asp-action="ConvertTemperature" asp-route-parkCode="@Model.ParkCode">Convert Temperature</a>
-
-}
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -149,6 +208,9 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[0].PictureName).png" alt="featured-images">
+                                <div class="container-overlay">
+                                    <h2>Monday</h2>
+                                </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
@@ -170,6 +232,9 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[1].PictureName).png" alt="featured-images">
+                                <div class="container-overlay">
+                                    <h2>Tuesday</h2>
+                                </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
@@ -190,6 +255,9 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[2].PictureName).png" alt="featured-images">
+                                <div class="container-overlay">
+                                    <h2>Wednesday</h2>
+                                </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
@@ -217,6 +285,9 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[3].PictureName).png" alt="featured-images">
+                                <div class="container-overlay">
+                                    <h2>Thursday</h2>
+                                </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
@@ -237,6 +308,9 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[4].PictureName).png" alt="featured-images">
+                                <div class="container-overlay">
+                                    <h2>Friday</h2>
+                                </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
@@ -253,7 +327,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -268,3 +342,8 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+    </div>
+</body>
+</html>
+
+
