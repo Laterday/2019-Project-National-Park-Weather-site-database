@@ -6,8 +6,6 @@ using System.Data.SqlClient;
 using System.Collections.Generic;
 
 
-
-
 namespace Capstone.Web.Tests
 {
     [TestClass]
