@@ -127,7 +127,7 @@
                             <span>@Model.Park.ParkDescription.Substring(0, 1)</span>@Model.Park.ParkDescription.Substring(1)
                         </p>
                         <p>
-                            @Model.Park.InspirationalQuote
+                            "@Model.Park.InspirationalQuote"
                         </p>
 
                         <p id="quote">- @Model.Park.InspirationalQuoteSource</p>
@@ -211,7 +211,7 @@
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[0].PictureName).png" alt="featured-images">
                                 <div class="container-overlay">
-                                    <h2>Monday</h2>
+                                    <h2>@Model.WeatherList[0].ForecastDayOfWeek</h2>
                                 </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
@@ -235,7 +235,7 @@
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[1].PictureName).png" alt="featured-images">
                                 <div class="container-overlay">
-                                    <h2>Tuesday</h2>
+                                    <h2>@Model.WeatherList[1].ForecastDayOfWeek</h2>
                                 </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
@@ -258,7 +258,7 @@
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[2].PictureName).png" alt="featured-images">
                                 <div class="container-overlay">
-                                    <h2>Wednesday</h2>
+                                    <h2>@Model.WeatherList[2].ForecastDayOfWeek</h2>
                                 </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
@@ -287,7 +287,7 @@
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[3].PictureName).png" alt="featured-images">
                                 <div class="container-overlay">
-                                    <h2>Thursday</h2>
+                                    <h2>@Model.WeatherList[3].ForecastDayOfWeek</h2>
                                 </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
@@ -310,7 +310,7 @@
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[4].PictureName).png" alt="featured-images">
                                 <div class="container-overlay">
-                                    <h2>Friday</h2>
+                                    <h2>@Model.WeatherList[4].ForecastDayOfWeek</h2>
                                 </div>
                                 <div class="single-featured-box-overlay">
                                     <ul>
