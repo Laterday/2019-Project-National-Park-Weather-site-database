@@ -4,38 +4,47 @@
     ViewData["Title"] = "ViewSurveyResults";
 }
 
-<h2>ViewSurveyResults</h2>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        .container > a {
+            display: none;
+        }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SurveyCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ParkName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SurveyCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParkName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        .img-item{
+            margin-bottom: 0px;
+        }
+
+        .single-featured-box-overlay, .img-item-overlay{
+            width: 550px;
+        }
+    </style>
+</head>
+<body>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="img-item">
+                            <img src="~/img/parks/@(item.ParkCode).jpg" alt="images">
+                            <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h3>    
+                                <form action="/Home/Detail" method="get">
+                                    <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@item.ParkCode">Detail</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParkName)
+                    </td>                  
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>
