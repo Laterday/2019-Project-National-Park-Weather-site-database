@@ -9,10 +9,15 @@ using System.Collections.Generic;
 namespace Capstone.Web.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class CapstoneWebTests
     {
         private TransactionScope tran;
         private string connectionString;
+
+        public CapstoneWebTests(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
 
         [TestInitialize]
         public void Initialize()
@@ -29,6 +34,7 @@ namespace Capstone.Web.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            Assert.IsTrue(true);
         }
     }
 }

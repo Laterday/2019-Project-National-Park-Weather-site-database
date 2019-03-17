@@ -10,7 +10,7 @@ namespace Capstone.Web.Tests
     public class UnitTest1
     {
         private TransactionScope tran;
-        private string connectionString;
+        private string connectionString = "";
 
         [TestInitialize]
         public void Initialize()
@@ -27,6 +27,7 @@ namespace Capstone.Web.Tests
         [TestMethod]
         public void TestMethod1()
         {
+            Assert.IsTrue(true);
         }
     }
 }
