@@ -19,6 +19,25 @@
         .single-featured-box-overlay, .img-item-overlay{
             width: 550px;
         }
+        tr:nth-child(odd) {
+            background-color: darkgray;
+        }
+        tr:nth-child(Even) {
+            background-color: lightgray;
+        }
+
+        .td-parkName > h2{
+            margin-top: 30%;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .td-parkName > p {
+            font-size: 16px;
+            font-weight:500;
+            padding-left: 40px;
+        }
+        
     </style>
 </head>
 <body>
@@ -38,8 +57,9 @@
                             </div>
                         </div>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ParkName)
+                    <td class="td-parkName">
+                        <h2>@Html.DisplayFor(modelItem => item.ParkName)</h2>
+                        <p>@item.SurveyCount surveys submitted!! </p>
                     </td>                  
                 </tr>
             }
