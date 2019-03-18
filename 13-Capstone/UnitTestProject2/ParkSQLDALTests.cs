@@ -4,37 +4,68 @@ using System.Transactions;
 using Capstone.Web.Models;
 using System.Data.SqlClient;
 using System.Collections.Generic;
+using Capstone.Web.DAL;
+using Capstone.Web.DAL.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-
-namespace Capstone.Web.Tests
+namespace Capstone.Web
 {
     [TestClass]
-    public class CapstoneWebTests
+    public class ParkSQLDALTests
     {
-        private TransactionScope tran;
-        private string connectionString;
-
-        public CapstoneWebTests(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
+        private TransactionScope transaction;
+        private string connectionString = @"Data Source=.\sqlexpress;Initial Catalog=NPGeek;Integrated Security=True";
+        private int affectedRows;
 
         [TestInitialize]
         public void Initialize()
         {
-            tran = new TransactionScope();
+            transaction = new TransactionScope();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand command;
                 connection.Open();
+
+                SqlCommand command = new SqlCommand("INSERT INTO park VALUES ('FP', 'Fake Park', 'Ohio', 100, 100, 100, 100, 'Warm', 2000, 100, 'Visit soon!', 'Bono', 'A really cool park.', 1, 100)", connection);
+
+                affectedRows =  (int)command.ExecuteNonQuery();
             }
         }
 
-        [TestMethod]
-        public void TestMethod1()
+        [TestCleanup]
+        public void Cleanup()
         {
-            Assert.IsTrue(true);
+            transaction.Dispose();
+        }
+
+        [TestMethod]
+        public void GetParksTest()
+        {
+            ParkSQLDAL park = new ParkSQLDAL(connectionString);
+            List<Park> parks = park.GetParks();
+
+            Assert.AreEqual(1, affectedRows);
+            Assert.IsTrue(parks.Count >= 1);
+        }
+
+        [TestMethod]
+        public void GetUniqueParkNamesTest()
+        {
+            ParkSQLDAL park = new ParkSQLDAL(connectionString);
+            List<SelectListItem> parks = park.GetUniqueParkNames();
+
+            Assert.AreEqual(1, affectedRows);
+            Assert.IsTrue(parks.Count >= 1);
+        }
+
+        [TestMethod]
+        public void GetParkDetailsTest()
+        {
+            ParkSQLDAL park = new ParkSQLDAL(connectionString);
+            Park newPark = park.GetParkDetails("FP");
+
+            Assert.AreEqual(1, affectedRows);
+            Assert.AreEqual("Fake Park", newPark.ParkName);
         }
     }
 }

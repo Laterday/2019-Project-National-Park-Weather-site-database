@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Capstone.Web.Tests
+namespace Capstone.Web
 {
     [TestClass]
     public class TempConversionTest
