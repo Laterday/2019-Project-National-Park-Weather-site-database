@@ -5,7 +5,6 @@ using Capstone.Web.Models;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using Capstone.Web.DAL;
-using Capstone.Web.DAL.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Capstone.Web
