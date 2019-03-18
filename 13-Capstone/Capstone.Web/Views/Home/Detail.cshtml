@@ -89,8 +89,30 @@
         .single-featured-box:hover .container-overlay {
             bottom: 90%;
             height: 10%;
+
         }
 
+        form{
+            float:left;
+            padding-right: 25px;
+        }
+
+        .cold-text{
+            color: deepskyblue;
+            font-weight: bold;
+        }
+
+        .warm-text {
+            color: orangered;
+            font-weight: bold;
+        }
+
+        .text-car2{
+            padding:0px 35px 15px 35px;
+        }
+        body{
+            padding-bottom: -50px;
+        }
         /*h1 {
             width: 100%;
             font-size: 64px;
@@ -184,14 +206,15 @@
                         <form asp-controller="Home" asp-action="ConvertTemperature" method="get">
                             <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model.ParkCode">Temp Conversion</button>
                         </form>
+                        <form asp-controller="Survey" asp-action="Submit" method="get">
+                            <button class="btn welcome-btn gallery-btn">Daily Survey</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="about-overlay-2"></div>
     </section>
-
-    <a asp-controller="Survey" asp-action="Submit">Take our daily survey</a>
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -205,75 +228,77 @@
         <div class="carousel-inner">
             <div class="item active" id="car1">
 
-                <div class="featured-txt">
-                    <div class="row" id="car1">
-                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
-                            <div class="single-featured-box" id="car1">
-                                <img src="~/img/weather/@(Model.WeatherList[0].PictureName).png" alt="featured-images">
-                                <div class="container-overlay">
-                                    <h2>@Model.WeatherList[0].ForecastDayOfWeek</h2>
-                                </div>
-                                <div class="single-featured-box-overlay">
-                                    <ul>
-                                        @if (ViewBag.TempUnit == "Celsius")
-                                        {
-                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[0].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[0].High) C</li>
+                <div >
+                    <div class="featured-txt">
+                        <div class="row" id="car1">
+                            <div class="col-xs-4" id="car1">
+                                <div class="single-featured-box" id="car1">
+                                    <img src="~/img/weather/@(Model.WeatherList[0].PictureName).png" class="img-responsive-center-block" alt="featured-images">
+                                    <div class="container-overlay">
+                                        <h2>@Model.WeatherList[0].ForecastDayOfWeek</h2>
+                                    </div>
+                                    <div class="single-featured-box-overlay">
+                                        <ul>
+                                            @if (ViewBag.TempUnit == "Celsius")
+                                            {
+                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[0].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[0].High)</span> C</li>
 
-                                        }
-                                        else
-                                        {
-                                            <li>Low @Model.WeatherList[0].Low f - High @Model.WeatherList[0].High f</li>
+                                            }
+                                            else
+                                            {
+                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[0].Low</span> f - High <span class="warm-text">@Model.WeatherList[0].High</span> f</li>
 
-                                        }
-                                        <li>@Model.WeatherList[0].Recommendation</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
-                            <div class="single-featured-box" id="car1">
-                                <img src="~/img/weather/@(Model.WeatherList[1].PictureName).png" alt="featured-images">
-                                <div class="container-overlay">
-                                    <h2>@Model.WeatherList[1].ForecastDayOfWeek</h2>
-                                </div>
-                                <div class="single-featured-box-overlay">
-                                    <ul>
-                                        @if (ViewBag.TempUnit == "Celsius")
-                                        {
-                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[1].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[1].High) C</li>
-
-                                        }
-                                        else
-                                        {
-                                            <li>Low @Model.WeatherList[1].Low f - High @Model.WeatherList[1].High f</li>
-
-                                        }
-                                        <li>@Model.WeatherList[1].Recommendation</li>
-                                    </ul>
+                                            }
+                                            <li class="text-car2">@Model.WeatherList[0].Recommendation</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
-                            <div class="single-featured-box" id="car1">
-                                <img src="~/img/weather/@(Model.WeatherList[2].PictureName).png" alt="featured-images">
-                                <div class="container-overlay">
-                                    <h2>@Model.WeatherList[2].ForecastDayOfWeek</h2>
+
+                            <div class="col-xs-4" id="car1">
+                                <div class="single-featured-box" id="car1">
+                                    <img src="~/img/weather/@(Model.WeatherList[1].PictureName).png" class="img-responsive-center-block" alt="featured-images">
+                                    <div class="container-overlay">
+                                        <h2>@Model.WeatherList[1].ForecastDayOfWeek</h2>
+                                    </div>
+                                    <div class="single-featured-box-overlay">
+                                        <ul>
+                                            @if (ViewBag.TempUnit == "Celsius")
+                                            {
+                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[1].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[1].High)</span> C</li>
+
+                                            }
+                                            else
+                                            {
+                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[1].Low</span> f - High <span class="warm-text">@Model.WeatherList[1].High</span> f</li>
+
+                                            }
+                                            <li class="text-car2">@Model.WeatherList[1].Recommendation</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="single-featured-box-overlay">
-                                    <ul>
-                                        @if (ViewBag.TempUnit == "Celsius")
-                                        {
-                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[2].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[2].High) C</li>
+                            </div>
+                            <div class="col-xs-4" id="car1">
+                                <div class="single-featured-box" id="car1">
+                                    <img src="~/img/weather/@(Model.WeatherList[2].PictureName).png" alt="featured-images">
+                                    <div class="container-overlay">
+                                        <h2>@Model.WeatherList[2].ForecastDayOfWeek</h2>
+                                    </div>
+                                    <div class="single-featured-box-overlay">
+                                        <ul>
+                                            @if (ViewBag.TempUnit == "Celsius")
+                                            {
+                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[2].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[2].High)</span> C</li>
 
-                                        }
-                                        else
-                                        {
-                                            <li>Low @Model.WeatherList[2].Low f - High @Model.WeatherList[2].High f</li>
+                                            }
+                                            else
+                                            {
+                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[2].Low</span> f - High <span class="warm-text">@Model.WeatherList[2].High</span> f</li>
 
-                                        }
-                                        <li>@Model.WeatherList[2].Recommendation</li>
-                                    </ul>
+                                            }
+                                            <li class="text-car2">@Model.WeatherList[2].Recommendation</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -283,7 +308,7 @@
             <div class="item" id="car1">
                 <div class="featured-txt">
                     <div class="row" id="car1">
-                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
+                        <div class="col-xs-6" id="car1">
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[3].PictureName).png" alt="featured-images">
                                 <div class="container-overlay">
@@ -293,20 +318,20 @@
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
                                         {
-                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[3].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[3].High) C</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[3].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[3].High)</span> C</li>
 
                                         }
                                         else
                                         {
-                                            <li>Low @Model.WeatherList[3].Low f - High @Model.WeatherList[3].High f</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[3].Low</span> f - High <span class="warm-text">@Model.WeatherList[3].High</span> f</li>
 
                                         }
-                                        <li>@Model.WeatherList[3].Recommendation</li>
+                                        <li class="text-car2">@Model.WeatherList[3].Recommendation</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12" id="car1">
+                        <div class="col-xs-6" id="car1">
                             <div class="single-featured-box" id="car1">
                                 <img src="~/img/weather/@(Model.WeatherList[4].PictureName).png" alt="featured-images">
                                 <div class="container-overlay">
@@ -316,15 +341,15 @@
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
                                         {
-                                            <li>Low @Weather.FarenheitToCelsius(Model.WeatherList[4].Low) C - High @Weather.FarenheitToCelsius(Model.WeatherList[4].High) C</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[4].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[4].High)</span> C</li>
 
                                         }
                                         else
                                         {
-                                            <li>Low @Model.WeatherList[4].Low f - High @Model.WeatherList[4].High f</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[4].Low</span> f - High <span class="warm-text">@Model.WeatherList[4].High</span> f</li>
 
                                         }
-                                        <li>@Model.WeatherList[4].Recommendation</li>
+                                        <li class="text-car2">@Model.WeatherList[4].Recommendation</li>
                                     </ul>
                                 </div>
                             </div>
