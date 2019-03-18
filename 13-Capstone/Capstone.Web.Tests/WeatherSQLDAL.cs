@@ -24,8 +24,10 @@ namespace Capstone.Web.Tests
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("INSERT INTO weather VALUES ('FP', 1, 28, 100, 'rain')", connection);
+                SqlCommand command = new SqlCommand("INSERT INTO weather (parkCode, fiveDayForecastValue, low, high, forecast) VALUES ('FP', 1, 28, 100, 'rain')", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO park VALUES ('FP', 'Fake Park', 'Ohio', 100, 100, 100, 100, 'Warm', 2000, 100, 'Visit soon!', 'Bono', 'A really cool park.', 1, 100)", connection);
 
+                cmd.ExecuteNonQuery();
                 affectedRows = (int)command.ExecuteNonQuery();
             }
         }
@@ -44,7 +46,7 @@ namespace Capstone.Web.Tests
 
             Assert.AreEqual(1, affectedRows);
             Assert.AreEqual("rain", weatherList[0].Forecast);
-            Assert.AreEqual("Be sure to pack rain gear and wear waterproof shoes. Since it will be so warm out, bringing an extra gallon of water is recommended.", weatherList[0].Recommendation);
+            Assert.AreEqual("Be sure to pack rain gear and wear waterproof shoes. Since it will be so warm out, bringing an extra gallon of water is recommended. It may be worthwhile to dress in breathable layers due to the variation in temperature throughout the day.", weatherList[0].Recommendation);
         }
     }
 }
