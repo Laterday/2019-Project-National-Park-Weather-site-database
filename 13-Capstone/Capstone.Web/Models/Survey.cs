@@ -15,6 +15,7 @@ namespace Capstone.Web.Models
 
         [Required]
         [Display(Name = "Email")]
+        [EmailAddress]
         public string EmailAddress { get; set; }
 
         [Required]
