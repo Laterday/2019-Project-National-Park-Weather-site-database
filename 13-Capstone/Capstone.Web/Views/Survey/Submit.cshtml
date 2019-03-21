@@ -16,10 +16,15 @@
             bottom: 1px;
             position: absolute;
             left: -200px;
-            display: inline-block;
+            display: block;
             width: 300px;
             height: 600px;
             background-color: rgb(128, 128, 128, .8);
+        }
+
+        #image-submit-survey{
+            width: auto;
+            height: 800px;
         }
 
         form {
@@ -55,7 +60,7 @@
 </head>
 <body>
     <div class="survey-all">
-        <img src="~/img/landscapes-mountains-water-nature-wallpapers-hd-live.jpg" />
+        <img id="image-submit-survey" src="~/img/landscapes-mountains-water-nature-wallpapers-hd-live.jpg" />
         <div class="row">
             <div class="col-md-4">
                 <form asp-action="Submit">
