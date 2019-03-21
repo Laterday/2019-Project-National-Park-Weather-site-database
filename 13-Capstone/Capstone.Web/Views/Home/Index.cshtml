@@ -1,91 +1,90 @@
 ﻿@model List<Park>
 
-@{
+    @{
     ViewData["Title"] = "Index";
     Random rnd = new Random();
-}
+    }
 
-<!doctype html>
-<html class="no-js" lang="en">
-<head>
+    <!doctype html>
+    <html class="no-js" lang="en">
+    <head>
 
-    <title>National Park Weather Service</title>
-    <style>
+        <title>National Park Weather Service</title>
+        <style>
 
-        .img-item > img {
-            height: 500px;
-            
-        }
+            .img-item > img {
+                height: 500px;
+            }
 
-        .overlay-discription {
-            color: white;
-            font-size: 10px;
-            padding: 15px;
-            text-indent: 10%;
-        }
+            .overlay-discription {
+                color: white;
+                font-size: 10px;
+                padding: 15px;
+                text-indent: 10%;
+            }
 
-        .img-item-overlay {
-            background-color: rgba(0,0,0,0.5);
-        }
+            .img-item-overlay {
+                background-color: rgba(0,0,0,0.5);
+            }
 
-        .img-item {
-            /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
-            border-radius: 0.5%;
-        }
-    </style>
-</head>
-<body>
+            .img-item {
+                /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+                border-radius: 0.5%;
+            }
+        </style>
+    </head>
+    <body>
 
-    <img src="~/img/landscapes-mountains-water-nature-wallpapers-hd-live.jpg" />
+        <img src="~/img/landscapes-mountains-water-nature-wallpapers-hd-live.jpg" />
 
-    <section class="gallery">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-12">
-                    <div class="single-gallery-box">
+        <section class="gallery">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="single-gallery-box">
 
-                        @for (int i = 0; i < Model.Count; i++)
-                        {
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
                             if (i % 2 == 0)
                             {
-                                <div class="img-item">
-                                    <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
-                                    <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
-                                        <p class="overlay-discription">@Model[i].ParkDescription</p>
-                                        <form action="/Home/Detail" method="get">
-                                            <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
-                                        </form>
-                                    </div>
+                            <div class="img-item">
+                                <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
+                                <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                    <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                    <p class="overlay-discription">@Model[i].ParkDescription</p>
+                                    <form action="/Home/Detail" method="get">
+                                        <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
+                                    </form>
                                 </div>
+                            </div>
                             }
-                        }
+                            }
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-12">
-                    <div class="single-gallery-box">
-                        @for (int i = 0; i < Model.Count; i++)
-                        {
+                    <div class="col-md-6 col-12">
+                        <div class="single-gallery-box">
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
                             if (i % 2 != 0)
                             {
-                                <div class="img-item">
-                                    <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
-                                    <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                        <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
-                                        <p class="overlay-discription">@Model[i].ParkDescription</p>
-                                        <form action="/Home/Detail" method="get">
-                                            <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
-                                        </form>
-                                    </div>
+                            <div class="img-item">
+                                <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
+                                <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                    <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                    <p class="overlay-discription">@Model[i].ParkDescription</p>
+                                    <form action="/Home/Detail" method="get">
+                                        <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
+                                    </form>
                                 </div>
+                            </div>
                             }
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</body>
+        </section>
+    </body>
 </html>
 
 

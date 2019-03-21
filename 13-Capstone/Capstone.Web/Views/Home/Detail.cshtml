@@ -8,9 +8,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <style>
-        .test > img {
-            width: 80%;
-            height: 80%;
+        .single-about-txt > h2 {
+            width: 40%;
+        }
+
+        .navbar-nav {
+            position: relative;
+            left: 70%;
         }
 
         .container > a {
@@ -21,15 +25,19 @@
             margin-top: 100px;
         }
 
+        .about {
+            display: flex;
+            flex-direction: row;
+        }
+
         .ul-1 > li {
             color: white;
         }
 
         .img-detail {
-            position: relative;
-            right: 60px;
-            top: 50px;
+            padding-top: 20%;
             width: 120%;
+            padding-left: 10%;
         }
 
         #car1 {
@@ -38,11 +46,12 @@
 
         #quote {
             margin: 0;
-            text-indent: 20em
+            text-indent: 20em;
+            font-style: italic;
         }
 
         .ul-1 > li {
-            padding-bottom: 8px;
+            padding-bottom: -40px;
         }
 
         .ul-2 > li {
@@ -57,11 +66,9 @@
             padding-bottom: 8px;
         }
 
-        .single-featured-box-overlay > ul > li{
+        .single-featured-box-overlay > ul > li {
             font-size: 14px;
         }
-
-
 
         .single-featured-box {
             position: relative;
@@ -89,15 +96,14 @@
         .single-featured-box:hover .container-overlay {
             bottom: 90%;
             height: 10%;
-
         }
 
-        form{
-            float:left;
+        form {
+            float: left;
             padding-right: 25px;
         }
 
-        .cold-text{
+        .cold-text {
             color: deepskyblue;
             font-weight: bold;
         }
@@ -107,35 +113,14 @@
             font-weight: bold;
         }
 
-        .text-car2{
-            padding:0px 35px 15px 35px;
-        }
-        body{
-            padding-bottom: -50px;
-        }
-        /*h1 {
-            width: 100%;
-            font-size: 64px;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            opacity: 1;
+        .text-car2 {
+            padding: 0px 35px 0px 35px;
         }
 
-        .fontLayer {
-            z-index: 1;
+        .quote-main {
+            font-style: italic;
+            font-weight: bold;
         }
-
-        .fadeTop {
-            width: 100%;
-            height: 2000px;
-            z-index: 5;
-            position: absolute;
-            top: 0;
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 46%,rgba(255,255,255,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
-        }*/
-
     </style>
 </head>
 <body>
@@ -148,7 +133,7 @@
                         <p>
                             <span>@Model.Park.ParkDescription.Substring(0, 1)</span>@Model.Park.ParkDescription.Substring(1)
                         </p>
-                        <p>
+                        <p class="quote-main">
                             "@Model.Park.InspirationalQuote"
                         </p>
 
@@ -201,7 +186,7 @@
                             <li>We host <span class="span-bold">@Model.Park.AnnualVisitorCount.ToString("#,###")</span> Annual visitors </li>
                             <li><span class="span-bold">@Model.Park.NumberOfAnimalSpecies.ToString("#,###")</span> Unique animal species</li>
                             <li><span class="span-bold">@Model.Park.Acreage.ToString("#,###")</span> Acres of wilderness</li>
-                            <li><span class="span-bold">@Model.Park.ElevationInFeet.ToString("#,###")</span> feet of elevation for you climbers out there</li>
+                            <li><span class="span-bold">@Model.Park.ElevationInFeet.ToString("#,###")</span> feet of elevation</li>
                         </ul>
                         <form asp-controller="Home" asp-action="ConvertTemperature" method="get">
                             <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model.ParkCode">Temp Conversion</button>
@@ -228,7 +213,7 @@
         <div class="carousel-inner">
             <div class="item active" id="car1">
 
-                <div >
+                <div>
                     <div class="featured-txt">
                         <div class="row" id="car1">
                             <div class="col-xs-4" id="car1">
@@ -241,13 +226,14 @@
                                         <ul>
                                             @if (ViewBag.TempUnit == "Celsius")
                                             {
-                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[0].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[0].High)</span> C</li>
+                                                <li class="text-car2">High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[0].High)</span>°C</li>
+                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[0].Low)</span>°C</li>
 
                                             }
                                             else
                                             {
-                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[0].Low</span> f - High <span class="warm-text">@Model.WeatherList[0].High</span> f</li>
-
+                                                <li class="text-car2">High <span class="warm-text">@Model.WeatherList[0].High</span>°F</li>
+                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[0].Low</span>°F</li>
                                             }
                                             <li class="text-car2">@Model.WeatherList[0].Recommendation</li>
                                         </ul>
@@ -265,13 +251,13 @@
                                         <ul>
                                             @if (ViewBag.TempUnit == "Celsius")
                                             {
-                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[1].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[1].High)</span> C</li>
-
+                                                <li class="text-car2">High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[1].High)</span>°C</li>
+                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[1].Low)</span>°C</li>
                                             }
                                             else
                                             {
-                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[1].Low</span> f - High <span class="warm-text">@Model.WeatherList[1].High</span> f</li>
-
+                                                <li class="text-car2">High <span class="warm-text">@Model.WeatherList[1].High</span>°F</li>
+                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[1].Low</span>°F</li>
                                             }
                                             <li class="text-car2">@Model.WeatherList[1].Recommendation</li>
                                         </ul>
@@ -288,13 +274,13 @@
                                         <ul>
                                             @if (ViewBag.TempUnit == "Celsius")
                                             {
-                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[2].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[2].High)</span> C</li>
-
+                                                <li class="text-car2">High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[2].High)</span>°C</li>
+                                                <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[2].Low)</span>°C</li>
                                             }
                                             else
                                             {
-                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[2].Low</span> f - High <span class="warm-text">@Model.WeatherList[2].High</span> f</li>
-
+                                                <li class="text-car2">High <span class="warm-text">@Model.WeatherList[2].High</span>°F</li>
+                                                <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[2].Low</span>°F</li>
                                             }
                                             <li class="text-car2">@Model.WeatherList[2].Recommendation</li>
                                         </ul>
@@ -318,13 +304,13 @@
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
                                         {
-                                            <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[3].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[3].High)</span> C</li>
-
+                                            <li class="text-car2">High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[3].High)</span>°C</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[3].Low)</span>°C</li>
                                         }
                                         else
                                         {
-                                            <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[3].Low</span> f - High <span class="warm-text">@Model.WeatherList[3].High</span> f</li>
-
+                                            <li class="text-car2">High <span class="warm-text">@Model.WeatherList[3].High</span>°F</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[3].Low</span>°F</li>
                                         }
                                         <li class="text-car2">@Model.WeatherList[3].Recommendation</li>
                                     </ul>
@@ -341,13 +327,13 @@
                                     <ul>
                                         @if (ViewBag.TempUnit == "Celsius")
                                         {
-                                            <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[4].Low)</span> C - High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[4].High)</span> C</li>
-
+                                            <li class="text-car2">High <span class="warm-text">@Weather.FarenheitToCelsius(Model.WeatherList[4].High)</span>°C</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Weather.FarenheitToCelsius(Model.WeatherList[4].Low)</span>°C</li>
                                         }
                                         else
                                         {
-                                            <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[4].Low</span> f - High <span class="warm-text">@Model.WeatherList[4].High</span> f</li>
-
+                                            <li class="text-car2">High <span class="warm-text">@Model.WeatherList[4].High</span>°F</li>
+                                            <li class="text-car2">Low <span class="cold-text">@Model.WeatherList[4].Low</span>°F</li>
                                         }
                                         <li class="text-car2">@Model.WeatherList[4].Recommendation</li>
                                     </ul>

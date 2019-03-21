@@ -13,20 +13,6 @@ $(document).ready(function(){
 3. welcome animation support
 ======================================*/
 
-    // 1. Scroll To Top 
-		$(window).on('scroll',function () {
-			if ($(this).scrollTop() > 300) {
-				$('.return-to-top').fadeIn();
-			} else {
-				$('.return-to-top').fadeOut();
-			}
-		});
-		$('.return-to-top').on('click',function(){
-				$('html, body').animate({
-				scrollTop: 0
-			}, 1500);
-			return false;
-		});
 
 	// 2. Smooth scrolling part start
 	
@@ -60,18 +46,7 @@ $(document).ready(function(){
 
 
 
-	// 3. welcome animation support
-
-        $(window).load(function(){
-        	$(".welcome-txt h2,.welcome-txt p").removeClass("animated fadeInUp").css({'opacity':'0'});
-            $(".welcome-txt button").removeClass("animated fadeInDown").css({'opacity':'0'});
-        });
-
-        $(window).load(function(){
-        	$(".welcome-txt h2,.welcome-txt p").addClass("animated fadeInUp").css({'opacity':'0'});
-            $(".welcome-txt button").addClass("animated fadeInDown").css({'opacity':'0'});
-        });
-
+	
 });
 
 

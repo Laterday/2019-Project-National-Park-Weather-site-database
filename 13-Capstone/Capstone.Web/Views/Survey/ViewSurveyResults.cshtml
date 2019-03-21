@@ -1,56 +1,57 @@
 ﻿@model IEnumerable<Capstone.Web.Models.SurveyResult>
 
-@{
+    @{
     ViewData["Title"] = "ViewSurveyResults";
-}
+    }
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-    <style>
-        .container > a {
-            display: none;
-        }
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+        <style>
+            .container > a {
+                display: none;
+            }
 
-        .img-item{
-            margin-bottom: 0px;
-        }
+            .img-item {
+                margin-bottom: 0px;
+            }
 
-        .single-featured-box-overlay, .img-item-overlay{
-            width: 550px;
-        }
-        tr:nth-child(odd) {
-            background-color: darkgray;
-        }
-        tr:nth-child(Even) {
-            background-color: lightgray;
-        }
+            .single-featured-box-overlay, .img-item-overlay {
+                width: 550px;
+            }
 
-        .td-parkName > h2{
-            margin-top: 30%;
-            font-size: 24px;
-            font-weight: bold;
-        }
+            tr:nth-child(odd) {
+                background-color: darkgray;
+            }
 
-        .td-parkName > p {
-            font-size: 16px;
-            font-weight:500;
-            padding-left: 40px;
-        }
-        
-    </style>
-</head>
-<body>
-    <table class="table">
-        <tbody>
-            @foreach (var item in Model)
-            {
+            tr:nth-child(Even) {
+                background-color: lightgray;
+            }
+
+            .td-parkName > h2 {
+                margin-top: 30%;
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .td-parkName > p {
+                font-size: 16px;
+                font-weight: 500;
+                padding-left: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <table class="table">
+            <tbody>
+                @foreach (var item in Model)
+                {
                 <tr>
                     <td>
                         <div class="img-item">
                             <img src="~/img/parks/@(item.ParkCode).jpg" alt="images">
                             <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h3>    
+                                <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h3>
                                 <form action="/Home/Detail" method="get">
                                     <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@item.ParkCode">Detail</button>
                                 </form>
@@ -59,12 +60,12 @@
                     </td>
                     <td class="td-parkName">
                         <h2>@Html.DisplayFor(modelItem => item.ParkName)</h2>
-                        <p>@item.SurveyCount surveys submitted!! </p>
-                    </td>                  
+                        <p>@item.SurveyCount surveys submitted</p>
+                    </td>
                 </tr>
-            }
-        </tbody>
-    </table>
+                }
+            </tbody>
+        </table>
 
-</body>
+    </body>
 </html>

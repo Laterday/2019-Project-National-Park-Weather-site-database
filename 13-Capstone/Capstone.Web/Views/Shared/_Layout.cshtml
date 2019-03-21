@@ -10,15 +10,10 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link href="~/css/animate.css" rel="stylesheet" />
-        <!--font-awesome.min.css-->
-        <link href="~/css/font-awesome.min.css" rel="stylesheet" />
         <!--bootstrap.min.css-->
         <link href="~/css/bootstrap.min.css" rel="stylesheet" />
         <!--style.css-->
         <link href="~/css/style.css" rel="stylesheet" />
-        <link href="~/css/responsive.css" rel="stylesheet" />
-        <link href="~/css/flaticon.css" rel="stylesheet" />
 
     </environment>
     <environment exclude="Development">
@@ -41,10 +36,10 @@
                         <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-area="" asp-controller="Home" asp-action="">About</a>
+                        <a asp-area="" asp-controller="Survey" asp-action="ViewSurveyResults">Survey Results</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-area="" asp-controller="Home" asp-action="">Contact</a>
+                        <a asp-area="" asp-controller="Survey" asp-action="Submit">Submit Survey</a>
                     </li>
                 </ul>
             </div>
@@ -61,7 +56,6 @@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/js/popper.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/custom.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
