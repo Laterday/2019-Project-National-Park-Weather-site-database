@@ -7,6 +7,11 @@
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title></title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!--bootstrap.min.css-->
+        <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+        <!--style.css-->
+        <link href="~/css/style.css" rel="stylesheet" />
         <style>
             .container > a {
                 display: none;
@@ -21,11 +26,11 @@
             }
 
             tr:nth-child(odd) {
-                background-color: darkgray;
+                background-color: lightgray;
             }
 
             tr:nth-child(Even) {
-                background-color: lightgray;
+                background-color: whitesmoke;
             }
 
             .td-parkName > h2 {
@@ -46,26 +51,28 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        <div class="img-item">
-                            <img src="~/img/parks/@(item.ParkCode).jpg" alt="images">
-                            <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h3>
-                                <form action="/Home/Detail" method="get">
-                                    <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@item.ParkCode">Detail</button>
-                                </form>
+                    <tr>
+                        <td>
+                            <div class="img-item">
+                                <img src="~/img/parks/@(item.ParkCode).jpg" alt="images">
+                                <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                    <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@item.ParkCode">@item.ParkName</a></h3>
+                                    <form action="/Home/Detail" method="get">
+                                        <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@item.ParkCode">Detail</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                    <td class="td-parkName">
-                        <h2>@Html.DisplayFor(modelItem => item.ParkName)</h2>
-                        <p>@item.SurveyCount surveys submitted</p>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="td-parkName">
+                            <h2>@Html.DisplayFor(modelItem => item.ParkName)</h2>
+                            <p>@item.SurveyCount surveys submitted</p>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
-
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/custom.js"></script>
     </body>
 </html>

@@ -37,6 +37,7 @@ namespace Capstone.Web.Controllers
             else
             {
                 bool result = surveySQLDAL.AddSurvey(survey);
+                //TODO : account for false
                 return RedirectToAction(nameof(ViewSurveyResults));
             }
         }

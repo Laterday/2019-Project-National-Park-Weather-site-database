@@ -10,7 +10,16 @@
     <head>
 
         <title>National Park Weather Service</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <!--bootstrap.min.css-->
+        <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+        <!--style.css-->
+        <link href="~/css/style.css" rel="stylesheet" />
         <style>
+
+            p {
+                margin-block-end: 0em;
+            }
 
             .img-item > img {
                 height: 500px;
@@ -46,19 +55,19 @@
 
                             @for (int i = 0; i < Model.Count; i++)
                             {
-                            if (i % 2 == 0)
-                            {
-                            <div class="img-item">
-                                <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
-                                <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                    <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
-                                    <p class="overlay-discription">@Model[i].ParkDescription</p>
-                                    <form action="/Home/Detail" method="get">
-                                        <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
-                                    </form>
-                                </div>
-                            </div>
-                            }
+                                if (i % 2 == 0)
+                                {
+                                    <div class="img-item">
+                                        <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
+                                        <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                            <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                            <p class="overlay-discription">@Model[i].ParkDescription</p>
+                                            <form action="/Home/Detail" method="get">
+                                                <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
                             }
                         </div>
                     </div>
@@ -66,25 +75,28 @@
                         <div class="single-gallery-box">
                             @for (int i = 0; i < Model.Count; i++)
                             {
-                            if (i % 2 != 0)
-                            {
-                            <div class="img-item">
-                                <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
-                                <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
-                                    <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
-                                    <p class="overlay-discription">@Model[i].ParkDescription</p>
-                                    <form action="/Home/Detail" method="get">
-                                        <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
-                                    </form>
-                                </div>
-                            </div>
-                            }
+                                if (i % 2 != 0)
+                                {
+                                    <div class="img-item">
+                                        <img src="~/img/parks/@(Model[i].ParkCode).jpg" alt="images">
+                                        <div class="img-item-overlay d-flex flex-column justify-content-center align-items-center">
+                                            <h3><a asp-controller="Home" asp-action="Detail" asp-route-parkCode="@Model[i].ParkCode">@Model[i].ParkName</a></h3>
+                                            <p class="overlay-discription">@Model[i].ParkDescription</p>
+                                            <form action="/Home/Detail" method="get">
+                                                <button class="btn welcome-btn gallery-btn" name="parkCode" type="submit" value="@Model[i].ParkCode">Detail</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                }
                             }
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/custom.js"></script>
     </body>
 </html>
 

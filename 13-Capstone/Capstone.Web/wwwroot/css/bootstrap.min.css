@@ -215,30 +215,7 @@
             flex-direction: row
         }
 
-            .navbar-expand-sm .navbar-nav .dropdown-menu {
-                position: absolute
-            }
-
-            .navbar-expand-sm .navbar-nav .nav-link {
-                padding-right: .5rem;
-                padding-left: .5rem
-            }
-
-        .navbar-expand-sm > .container, .navbar-expand-sm > .container-fluid {
-            -ms-flex-wrap: nowrap;
-            flex-wrap: nowrap
-        }
-
-        .navbar-expand-sm .navbar-collapse {
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-preferred-size: auto;
-            flex-basis: auto
-        }
-
-        .navbar-expand-sm .navbar-toggler {
-            display: none
-        }
+     
 }
 
 @media (max-width:767.98px) {
